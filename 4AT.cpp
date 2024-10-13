@@ -1,6 +1,8 @@
 #include "4AT.h"
 #include <iostream>
 
+using namespace std;
+
 elmFourAT::elmFourAT(infotype data):info(data){
     for (size_t i = 0;i < 4;i++){
         children[i] = nullptr;
@@ -8,8 +10,9 @@ elmFourAT::elmFourAT(infotype data):info(data){
 }
 
 bool isLeaf(elmFourAT p){
+    // Fungsi untuk mengecek apakah suatu node dari tree merupakan leaf atau bukan
     for (size_t i = 0;i < 4;i++){
-        if (p->children[i] != nullptr){
+        if (p.children[i] != nullptr){
             return false;
         }
     }
@@ -18,13 +21,15 @@ bool isLeaf(elmFourAT p){
 
 FourAryTree::FourAryTree():root(nullptr){}
 
-void FourAryTree::traversePreorder(address p,address q,infotype info){
-    if (info == p->info){
-        q = p;
-    }
-    if q != nullptr{
-        for (size_t i = 0;i < 4;i++){
-            traversePreorder(p->children[i],q,info);
+void FourAryTree::traversePreorder(address p,address &q,infotype info){
+    if (p != nullptr){
+        if (info == p->info){
+            q = p;
+        }
+        if (q == nullptr){
+            for (size_t i = 0;i < 4;i++){
+                traversePreorder(p->children[i],q,info);
+            }
         }
     }
 }
@@ -33,6 +38,7 @@ void FourAryTree::traverseDelete(address p){
     if (p != nullptr){
         for (size_t i = 0;i < 4;i++){
             traverseDelete(p->children[i]);
+            p->children[i] = nullptr;
         }
         delete p;
     }
@@ -53,6 +59,7 @@ void FourAryTree::traversePrint(address p){
         if (n_child == 0){
             cout<<"Tidak mempunyai anak"<<endl;
         }
+        cout<<endl<<endl;
         for (size_t i = 0;i < 4;i++){
             traversePrint(p->children[i]);
         }
@@ -69,6 +76,10 @@ address FourAryTree::searchElm(infotype info){
     }else{
         return nullptr;
     }
+}
+
+void FourAryTree::insertRoot(infotype data){
+    this->root = new elmFourAT(data);
 }
 
 void FourAryTree::insertChild(infotype parentInfo,infotype childInfo,int position){
@@ -90,6 +101,7 @@ void FourAryTree::deleteChild(infotype parentInfo,infotype childInfo){
         for (size_t i = 0 ;i < 4;i++){
             if (childInfo == parent->children[i]->info){
                 child = parent->children[i];
+                parent->children[i] = nullptr;
                 break;
             }
         }
@@ -111,6 +123,7 @@ void FourAryTree::printAll(){
         if (n_child == 0){
             cout<<"Tidak memiliki anak"<<endl;
         }
+        cout<<endl<<endl;
         for (size_t i = 0;i < 4;i++){
             traversePrint(this->root->children[i]);
         }

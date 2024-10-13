@@ -1,5 +1,5 @@
-#ifndef 4AT_H_INCLUDED
-#define 4AT_H_INCLUDED
+#ifndef FOUR_AT_H_INCLUDED
+#define FOUR_AT_H_INCLUDED
 
 typedef int infotype;
 typedef struct elmFourAT* address;
@@ -17,7 +17,7 @@ struct FourAryTree{
 
     FourAryTree();
 
-    void traversePreorder(address,address,infotype);
+    void traversePreorder(address,address&,infotype);
     void traverseDelete(address);
     void traversePrint(address);
     address searchElm(infotype info);
@@ -28,6 +28,6 @@ struct FourAryTree{
     void deleteAll();
 };
 
-void createNewTree;
+void createNewTree();
 
-#endif // 4AT_H_INCLUDED
+#endif // FOUR_AT_H_INCLUDED

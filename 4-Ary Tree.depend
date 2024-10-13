@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1728784767 source:d:\hanif imaduddin\github\4-ary tree\4at.cpp
+	"4AT.h"
+	<iostream>
+
+1728779164 d:\hanif imaduddin\github\4-ary tree\4at.h
+
+1728782426 source:d:\hanif imaduddin\github\4-ary tree\main.cpp
+	<iostream>
+	"4AT.h"
+
